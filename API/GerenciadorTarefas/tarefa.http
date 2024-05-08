@@ -1,0 +1,30 @@
+### Cadastro de Tarefa
+POST http://localhost:5284/api/tarefas/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Tarefa 1",
+    "descricao": "Descrição da tarefa 1",
+    "prazo": 5,
+    "categoria": "Categoria 1"
+}
+
+### Listagem de Tarefas
+GET http://localhost:5284/api/tarefas/listar
+
+### Buscar Tarefa por ID
+GET http://localhost:5284/api/tarefas/buscar/{id}
+
+### Deletar Tarefa por ID
+DELETE http://localhost:5284/api/tarefas/deletar/{id}
+
+### Alterar Tarefa por ID
+PUT http://localhost:5284/api/tarefas/alterar/{id}
+Content-Type: application/json
+
+{
+    "nome": "Tarefa atualizada",
+    "descricao": "Descrição da tarefa atualizada",
+    "prazo": 7,
+    "categoria": "Categoria atualizada"
+}

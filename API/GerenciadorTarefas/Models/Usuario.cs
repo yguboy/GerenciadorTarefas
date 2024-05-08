@@ -1,17 +1,23 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GerenciadorTarefas.Models;
-
-public class Usuario
+namespace GerenciadorTarefas.Models
 {
-    public Usuario(string nome, int idade)
+    public class Usuario
     {
-        Id = Guid.NewGuid().ToString();
-        Nome = nome;
-        Idade = idade;
-    }
+        public Usuario(string nome, int idade)
+        {
+            Id = Guid.NewGuid().ToString();
+            Nome = nome;
+            Idade = idade;
+        }
 
-    public string Id { get; set; }
-    public string? Nome { get; set; }
-    public int Idade { get; set; }
+        public string Id { get; set; }
+
+        [Required(ErrorMessage = "O campo Nome é obrigatório.")]
+        public string Nome { get; set; }
+
+        [Range(0, 100, ErrorMessage = "A idade deve estar entre 0 e 100.")]
+        public int Idade { get; set; }
+    }
 }

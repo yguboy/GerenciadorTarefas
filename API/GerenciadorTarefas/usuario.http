@@ -1,6 +1,26 @@
-@GerenciadorTarefas_HostAddress = http://localhost:5284
+### Cadastro de Usuário
+POST http://localhost:5284/api/usuarios/cadastrar
+Content-Type: application/json
 
-GET {{GerenciadorTarefas_HostAddress}}/weatherforecast/
-Accept: application/json
+{
+    "nome": "Felipe",
+    "idade": 20
+}
 
-###
+### Listagem de Usuários
+GET http://localhost:5284/api/usuarios/listar
+
+### Buscar Usuário por ID
+GET http://localhost:5284/api/usuarios/buscar/{id}
+
+### Deletar Usuário por ID
+DELETE http://localhost:5284/api/usuarios/deletar/{id}
+
+### Alterar Usuário por ID
+PUT http://localhost:5284/api/usuarios/alterar/{id}
+Content-Type: application/json
+
+{
+    "nome": "Ygor",
+    "idade": 22
+}
