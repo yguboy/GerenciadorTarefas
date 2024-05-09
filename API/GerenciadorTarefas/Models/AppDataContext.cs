@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Models
+namespace GerenciadorTarefas.Models
 {
     public class AppDataContext : DbContext
     {

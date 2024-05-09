@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GerenciadorTarefas.Models
@@ -26,5 +25,8 @@ namespace GerenciadorTarefas.Models
 
         [Required(ErrorMessage = "O campo Categoria é obrigatório.")]
         public string Categoria { get; set; }
+
+        // Adicionando propriedade UsuarioId
+        public string UsuarioId { get; set; }
     }
 }

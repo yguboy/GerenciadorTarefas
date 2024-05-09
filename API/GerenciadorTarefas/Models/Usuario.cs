@@ -1,7 +1,6 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GerenciadorTarefas.Models
+namespace GerenciadorTarefas.Models // Alterado para corresponder ao namespace usado no contexto do banco de dados
 {
     public class Usuario
     {
