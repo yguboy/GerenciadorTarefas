@@ -14,7 +14,6 @@ namespace GerenciadorTarefas.Models
         }
 
         public string Id { get; set; }
-        public string UsuarioId { get; set; }
 
         [Required(ErrorMessage = "O campo Nome é obrigatório.")]
         public string Nome { get; set; }

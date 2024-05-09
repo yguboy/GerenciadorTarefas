@@ -110,7 +110,6 @@ app.MapPut("/api/tarefas/alterar/{id}", ([FromRoute] Guid id,[FromBody] Tarefa t
     tarefa.Descricao = tarefaAtualizada.Descricao;
     tarefa.Prazo = tarefaAtualizada.Prazo;
     tarefa.Categoria = tarefaAtualizada.Categoria;
-    tarefa.UsuarioId = tarefaAtualizada.UsuarioId;
 
     context.SaveChanges();
     return Results.Ok($"Tarefa '{tarefa.Nome}' alterada com sucesso.");
