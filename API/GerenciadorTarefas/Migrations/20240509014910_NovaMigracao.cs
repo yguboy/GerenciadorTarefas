@@ -5,7 +5,7 @@
 namespace GerenciadorTarefas.Migrations
 {
     /// <inheritdoc />
-    public partial class Teste : Migration
+    public partial class NovaMigracao : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,11 +15,11 @@ namespace GerenciadorTarefas.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    UsuarioId = table.Column<string>(type: "TEXT", nullable: false),
                     Nome = table.Column<string>(type: "TEXT", nullable: false),
                     Descricao = table.Column<string>(type: "TEXT", nullable: false),
                     Prazo = table.Column<double>(type: "REAL", nullable: false),
-                    Categoria = table.Column<string>(type: "TEXT", nullable: false)
+                    Categoria = table.Column<string>(type: "TEXT", nullable: false),
+                    UsuarioId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

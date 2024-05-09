@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDataContext>();
@@ -21,55 +22,69 @@ app.MapPost("/api/usuarios/cadastrar", ([FromBody] Usuario usuario,
 
     context.Usuarios.Add(usuario);
     context.SaveChanges();
-    return Results.Created($"Usuário {usuario.Nome} cadastrado com sucesso", usuario);
+    return Results.Created($"Usuario {usuario.Nome} cadastrado com sucesso", usuario);
 
 });
 
 app.MapGet("/api/usuarios/listar", ([FromServices] AppDataContext context) =>
 {
     var usuarios = context.Usuarios.ToList();
-    return usuarios.Count > 0 ? Results.Ok(usuarios) : Results.NotFound("Não há usuários cadastrados!!");
+    return usuarios.Count > 0 ? Results.Ok(usuarios) : Results.NotFound("Não há usuarios cadastrados!!");
 });
 
 app.MapGet("/api/usuarios/buscar/{id}", ([FromRoute] Guid id,[FromServices] AppDataContext context) =>
 {
-    var usuario = context.Usuarios.Find(id);
-    return usuario != null ? Results.Ok(usuario) : Results.NotFound("Usuário não encontrado!!");
+    var usuarioId = id.ToString(); 
+    var usuario = context.Usuarios.Find(usuarioId); 
+    return usuario != null ? Results.Ok(usuario) : Results.NotFound("Usuario não encontrado!!");
 });
 
-app.MapDelete("/api/usuarios/deletar/{id}", ([FromRoute] Guid id,[FromServices] AppDataContext context) =>
+
+app.MapDelete("/api/usuarios/deletar/{id}", ([FromRoute] string id, [FromServices] AppDataContext context) =>
 {
     var usuario = context.Usuarios.Find(id);
     if (usuario == null)
-        return Results.NotFound("Usuário não encontrado!");
+        return Results.NotFound("Usuario não encontrado!");
 
     context.Usuarios.Remove(usuario);
     context.SaveChanges();
-    return Results.Ok($"Usuário {usuario.Nome} deletado com sucesso!!");
+    return Results.Ok($"Usuario {usuario.Nome} deletado com sucesso!!");
 });
 
-app.MapPut("/api/usuarios/alterar/{id}", ([FromRoute] Guid id, [FromBody] Usuario usuarioAtualizado,
+
+app.MapPut("/api/usuarios/alterar/{id}", ([FromRoute] string id, [FromBody] Usuario usuarioAtualizado,
 [FromServices] AppDataContext context) =>
 {
     var usuario = context.Usuarios.Find(id);
     if (usuario == null)
-        return Results.NotFound("Usuário não encontrado.");
+        return Results.NotFound("Usuario não encontrado.");
 
     usuario.Nome = usuarioAtualizado.Nome;
     usuario.Idade = usuarioAtualizado.Idade;
 
     context.SaveChanges();
-    return Results.Ok($"Usuário {usuario.Nome} alterado com sucesso.");
+    return Results.Ok($"Usuario {usuario.Nome} alterado com sucesso.");
 });
 
+
 // Tarefas
-app.MapPost("/api/tarefas/cadastrar", ([FromBody] Tarefa tarefa,[FromServices] AppDataContext context) =>
+app.MapPost("/api/tarefas/cadastrar/{usuarioId}", ([FromBody] Tarefa tarefa, string usuarioId, [FromServices] AppDataContext context) =>
 {
     var erros = new List<ValidationResult>();
     if (!Validator.TryValidateObject(tarefa, new ValidationContext(tarefa), erros, true))
     {
         return Results.BadRequest(erros);
     }
+
+    // Verifica se o usuário com o ID fornecido existe
+    var usuario = context.Usuarios.Find(usuarioId);
+    if (usuario == null)
+    {
+        return Results.NotFound($"Usuário com ID {usuarioId} não encontrado.");
+    }
+
+    // Associa a tarefa ao usuário
+    tarefa.UsuarioId = usuarioId;
 
     context.Tarefas.Add(tarefa);
     context.SaveChanges();
@@ -82,13 +97,14 @@ app.MapGet("/api/tarefas/listar", ([FromServices] AppDataContext context) =>
     return tarefas.Count > 0 ? Results.Ok(tarefas) : Results.NotFound("Não há tarefas cadastradas.");
 });
 
-app.MapGet("/api/tarefas/buscar/{id}", ([FromRoute] Guid id,[FromServices] AppDataContext context) =>
+
+app.MapGet("/api/tarefas/buscar/{id}", ([FromRoute] string id, [FromServices] AppDataContext context) =>
 {
     var tarefa = context.Tarefas.Find(id);
     return tarefa != null ? Results.Ok(tarefa) : Results.NotFound("Tarefa não encontrada.");
 });
 
-app.MapDelete("/api/tarefas/deletar/{id}", ([FromRoute] Guid id,[FromServices] AppDataContext context) =>
+app.MapDelete("/api/tarefas/remover/{id}", ([FromRoute] Guid id,[FromServices] AppDataContext context) =>
 {
     var tarefa = context.Tarefas.Find(id);
     if (tarefa == null)
@@ -99,10 +115,22 @@ app.MapDelete("/api/tarefas/deletar/{id}", ([FromRoute] Guid id,[FromServices] A
     return Results.Ok($"Tarefa '{tarefa.Nome}' deletada com sucesso.");
 });
 
-app.MapPut("/api/tarefas/alterar/{id}", ([FromRoute] Guid id,[FromBody] Tarefa tarefaAtualizada,
-[FromServices] AppDataContext context) =>
+app.MapDelete("/api/tarefas/deletar/{id}", ([FromRoute] string id, [FromServices] AppDataContext context) =>
 {
     var tarefa = context.Tarefas.Find(id);
+    if (tarefa == null)
+        return Results.NotFound("Tarefa não encontrada.");
+
+    context.Tarefas.Remove(tarefa);
+    context.SaveChanges();
+    return Results.Ok($"Tarefa '{tarefa.Nome}' deletada com sucesso.");
+});
+
+app.MapPut("/api/tarefas/alterar/{id}", ([FromRoute] string id, [FromBody] Tarefa tarefaAtualizada,
+[FromServices] AppDataContext context) =>
+{
+    // Convertendo o ID para string
+    var tarefa = context.Tarefas.Find(id.ToString());
     if (tarefa == null)
         return Results.NotFound("Tarefa não encontrada.");
 

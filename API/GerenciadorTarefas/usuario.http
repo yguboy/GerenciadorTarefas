@@ -3,7 +3,7 @@ POST http://localhost:5284/api/usuarios/cadastrar
 Content-Type: application/json
 
 {
-    "nome": "Felipe",
+    "nome": "Felipe Andonini",
     "idade": 20
 }
 
@@ -11,13 +11,13 @@ Content-Type: application/json
 GET http://localhost:5284/api/usuarios/listar
 
 ### Buscar Usuário por ID
-GET http://localhost:5284/api/usuarios/buscar/{id}
+GET http://localhost:5284/api/usuarios/buscar/9d6fa04e-65cd-4f8a-adca-411d6157830c
 
 ### Deletar Usuário por ID
-DELETE http://localhost:5284/api/usuarios/deletar/{id}
+DELETE http://localhost:5284/api/usuarios/deletar/9d6fa04e-65cd-4f8a-adca-411d6157830c
 
 ### Alterar Usuário por ID
-PUT http://localhost:5284/api/usuarios/alterar/{id}
+PUT http://localhost:5284/api/usuarios/alterar/40e88552-d1f3-4ceb-8aec-f98ead29cb91
 Content-Type: application/json
 
 {

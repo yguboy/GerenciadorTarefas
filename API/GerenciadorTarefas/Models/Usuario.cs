@@ -13,7 +13,7 @@ namespace GerenciadorTarefas.Models // Alterado para corresponder ao namespace u
 
         public string Id { get; set; }
 
-        [Required(ErrorMessage = "O campo Nome é obrigatório.")]
+        [Required(ErrorMessage = "O campo Nome e obrigatorio.")]
         public string Nome { get; set; }
 
         [Range(0, 100, ErrorMessage = "A idade deve estar entre 0 e 100.")]
