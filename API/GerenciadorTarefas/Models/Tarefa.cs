@@ -14,6 +14,7 @@ namespace GerenciadorTarefas.Models
         }
 
         public string Id { get; set; }
+        public string UsuarioId { get; set; }
 
         [Required(ErrorMessage = "O campo Nome é obrigatório.")]
         public string Nome { get; set; }
@@ -25,8 +26,5 @@ namespace GerenciadorTarefas.Models
 
         [Required(ErrorMessage = "O campo Categoria é obrigatório.")]
         public string Categoria { get; set; }
-
-        // Adicionando propriedade UsuarioId
-        public string UsuarioId { get; set; }
     }
 }
