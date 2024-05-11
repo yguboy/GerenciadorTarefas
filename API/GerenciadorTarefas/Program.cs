@@ -76,14 +76,12 @@ app.MapPost("/api/tarefas/cadastrar/{usuarioId}", ([FromBody] Tarefa tarefa, str
         return Results.BadRequest(erros);
     }
 
-    // Verifica se o usuário com o ID fornecido existe
     var usuario = context.Usuarios.Find(usuarioId);
     if (usuario == null)
     {
         return Results.NotFound($"Usuário com ID {usuarioId} não encontrado.");
     }
 
-    // Associa a tarefa ao usuário
     tarefa.UsuarioId = usuarioId;
 
     context.Tarefas.Add(tarefa);
@@ -129,7 +127,6 @@ app.MapDelete("/api/tarefas/deletar/{id}", ([FromRoute] string id, [FromServices
 app.MapPut("/api/tarefas/alterar/{id}", ([FromRoute] string id, [FromBody] Tarefa tarefaAtualizada,
 [FromServices] AppDataContext context) =>
 {
-    // Convertendo o ID para string
     var tarefa = context.Tarefas.Find(id.ToString());
     if (tarefa == null)
         return Results.NotFound("Tarefa não encontrada.");

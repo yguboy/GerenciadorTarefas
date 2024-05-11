@@ -12,7 +12,7 @@ namespace GerenciadorTarefas.Models
             Descricao = descricao;
             Prazo = prazo;
             Categoria = categoria;
-            UsuarioId = usuarioId; // Inicializa a propriedade UsuarioId
+            UsuarioId = usuarioId;
         }
 
         public string Id { get; set; }
@@ -28,7 +28,6 @@ namespace GerenciadorTarefas.Models
         [Required(ErrorMessage = "O campo Categoria é obrigatório.")]
         public string Categoria { get; set; }
 
-        // armazena o ID do usuário
         public string UsuarioId { get; set; }
     }
 }
