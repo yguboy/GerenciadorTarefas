@@ -1,26 +1,26 @@
 ### Cadastro de Tarefa para Usuário Específico
-POST http://localhost:5284/api/tarefas/cadastrar/40e88552-d1f3-4ceb-8aec-f98ead29cb91
+POST http://localhost:5284/api/tarefas/cadastrar/8d44b4d5-6693-4c81-888c-1878948ff8f4
 Content-Type: application/json
 
 {
-    "nome": "Tarefa de hoje",
-    "descricao": " Limpar a casa toda e arrumar o quarto",
-    "prazo": 5 ,
-    "categoria": "Dia a Dias"
+    "nome": "Limpeza",
+    "descricao": "Limpar cozinha",
+    "prazo": 1 ,
+    "categoria": "Domestico"
 }
 
 ### Listagem de Tarefas
 GET http://localhost:5284/api/tarefas/listar
 
 ### Buscar Tarefa por ID
-GET http://localhost:5284/api/tarefas/buscar/b1953cb4-fc17-4a2d-9035-3118894f123a
+GET http://localhost:5284/api/tarefas/buscar/8281bdff-791e-4527-a354-837523ccc1e2
 
 
 ### Deletar Tarefa por ID
-DELETE http://localhost:5284/api/tarefas/deletar/b1953cb4-fc17-4a2d-9035-3118894f123a
+DELETE http://localhost:5284/api/tarefas/deletar/8281bdff-791e-4527-a354-837523ccc1e2
 
 ### Alterar Tarefa por ID
-PUT http://localhost:5284/api/tarefas/alterar/fdf695cd-67b0-452d-86ee-29837169f9c7
+PUT http://localhost:5284/api/tarefas/alterar/d089c921-212c-4bdd-afb9-9f05e3717c44
 Content-Type: application/json
 
 {

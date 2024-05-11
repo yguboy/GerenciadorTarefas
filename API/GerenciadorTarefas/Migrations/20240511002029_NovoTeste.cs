@@ -5,7 +5,7 @@
 namespace GerenciadorTarefas.Migrations
 {
     /// <inheritdoc />
-    public partial class NovaMigracao : Migration
+    public partial class NovoTeste : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
