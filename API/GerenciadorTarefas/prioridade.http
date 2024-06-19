@@ -1,0 +1,26 @@
+### Cadastro de Prioridade
+POST http://localhost:5284/api/prioridades/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Alta",
+    "tarefaId": "0e26f480-f52e-4811-ad69-b244688c79f1"
+}
+
+### Listagem de Prioridades
+GET http://localhost:5284/api/prioridades/listar
+
+### Buscar Prioridade por ID
+GET http://localhost:5284/api/prioridades/buscar/53f097b9-9e2e-41d0-a710-ab39a5b02c55
+
+### Deletar Prioridade por ID
+DELETE http://localhost:5284/api/prioridades/deletar/baa15599-e074-4dbc-9480-654ee8346a72
+
+### Alterar Prioridade por ID
+PUT http://localhost:5284/api/prioridades/alterar/aeade0b7-c86f-45b3-af6c-2be84087cb27
+Content-Type: application/json
+
+{
+    "nome": "Média",
+    "tarefaId": "8281bdff-791e-4527-a354-837523ccc1e2"
+}

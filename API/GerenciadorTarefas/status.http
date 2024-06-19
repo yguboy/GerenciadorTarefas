@@ -1,0 +1,26 @@
+### Cadastro de Status
+POST http://localhost:5284/api/status/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Em Progresso",
+    "tarefaId": "0e26f480-f52e-4811-ad69-b244688c79f1"
+}
+
+### Listagem de Status
+GET http://localhost:5284/api/status/listar
+
+### Buscar Status por ID
+GET http://localhost:5284/api/status/buscar/a6fa1626-2a9b-473a-94f2-0cffc8c1599b
+
+### Deletar Status por ID
+DELETE http://localhost:5284/api/status/deletar/a6fa1626-2a9b-473a-94f2-0cffc8c1599b
+
+### Alterar Status por ID
+PUT http://localhost:5284/api/status/alterar/67575ab4-d643-4b3a-977e-8110d86485be
+Content-Type: application/json
+
+{
+    "nome": "Concluído",
+    "tarefaId": "8281bdff-791e-4527-a354-837523ccc1e2"
+}

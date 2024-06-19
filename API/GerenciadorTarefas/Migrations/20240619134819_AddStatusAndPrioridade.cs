@@ -5,11 +5,37 @@
 namespace GerenciadorTarefas.Migrations
 {
     /// <inheritdoc />
-    public partial class NovoTeste : Migration
+    public partial class AddStatusAndPrioridade : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Prioridades",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    TarefaId = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prioridades", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Status",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    TarefaId = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Status", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Tarefas",
                 columns: table => new
@@ -43,6 +69,12 @@ namespace GerenciadorTarefas.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Prioridades");
+
+            migrationBuilder.DropTable(
+                name: "Status");
+
             migrationBuilder.DropTable(
                 name: "Tarefas");
 

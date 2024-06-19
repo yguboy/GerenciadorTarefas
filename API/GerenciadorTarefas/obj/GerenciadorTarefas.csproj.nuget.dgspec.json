@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ygor\\OneDrive\\Documentos\\Máteria Segunda\\GerenciadorTarefas\\API\\GerenciadorTarefas\\GerenciadorTarefas.csproj": {}
+    "C:\\Users\\felip\\GerenciadorTarefas\\API\\GerenciadorTarefas\\GerenciadorTarefas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ygor\\OneDrive\\Documentos\\Máteria Segunda\\GerenciadorTarefas\\API\\GerenciadorTarefas\\GerenciadorTarefas.csproj": {
+    "C:\\Users\\felip\\GerenciadorTarefas\\API\\GerenciadorTarefas\\GerenciadorTarefas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ygor\\OneDrive\\Documentos\\Máteria Segunda\\GerenciadorTarefas\\API\\GerenciadorTarefas\\GerenciadorTarefas.csproj",
+        "projectUniqueName": "C:\\Users\\felip\\GerenciadorTarefas\\API\\GerenciadorTarefas\\GerenciadorTarefas.csproj",
         "projectName": "GerenciadorTarefas",
-        "projectPath": "C:\\Users\\Ygor\\OneDrive\\Documentos\\Máteria Segunda\\GerenciadorTarefas\\API\\GerenciadorTarefas\\GerenciadorTarefas.csproj",
-        "packagesPath": "C:\\Users\\Ygor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ygor\\OneDrive\\Documentos\\Máteria Segunda\\GerenciadorTarefas\\API\\GerenciadorTarefas\\obj\\",
+        "projectPath": "C:\\Users\\felip\\GerenciadorTarefas\\API\\GerenciadorTarefas\\GerenciadorTarefas.csproj",
+        "packagesPath": "C:\\Users\\felip\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\felip\\GerenciadorTarefas\\API\\GerenciadorTarefas\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ygor\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\felip\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -57,7 +57,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
