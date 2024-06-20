@@ -3,8 +3,8 @@ POST http://localhost:5284/api/usuarios/cadastrar
 Content-Type: application/json
 
 {
-    "nome": "Jose Augusto",
-    "idade": 60
+    "nome": "Alice",
+    "idade": 21
 }
 
 ### Listagem de Usuários
