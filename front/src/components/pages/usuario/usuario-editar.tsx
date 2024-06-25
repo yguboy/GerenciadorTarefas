@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button, Box, FormControl, FormLabel, Input, Heading } from "@chakra-ui/react";
+import { Usuario } from "../../../Models/Usuario";
 
-function UsuarioEditar() {
-  const { id } = useParams();
-  const [usuario, setUsuario] = useState({
+const UsuarioEditar: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [usuario, setUsuario] = useState<Usuario>({
     nome: "",
-    email: "",
-    senha: ""
+    idade: 0,
   });
 
   useEffect(() => {
@@ -22,20 +22,27 @@ function UsuarioEditar() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    await fetch(`http://localhost:5284/api/usuarios/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(usuario)
-    });
+    try {
+      const response = await fetch(`http://localhost:5284/api/usuarios/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(usuario),
+      });
+      if (response.ok) {
+        console.log("Usuário atualizado com sucesso");
+      } else {
+        console.error("Erro ao atualizar usuário:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar usuário:", error);
+    }
   }
 
   return (
     <Box p={5}>
-      <Heading as="h1" size="xl" mb={5}>
-        Editar Usuário
-      </Heading>
+      <Heading as="h1" size="xl" mb={5}>Editar Usuário</Heading>
       <form onSubmit={handleSubmit}>
         <FormControl id="nome" mb={4}>
           <FormLabel>Nome</FormLabel>
@@ -46,35 +53,22 @@ function UsuarioEditar() {
             required
           />
         </FormControl>
-        <FormControl id="email" mb={4}>
-          <FormLabel>Email</FormLabel>
+        <FormControl id="idade" mb={4}>
+          <FormLabel>Idade</FormLabel>
           <Input
-            type="email"
-            value={usuario.email}
-            onChange={(e) => setUsuario({ ...usuario, email: e.target.value })}
+            type="number"
+            value={usuario.idade.toString()}
+            onChange={(e) => setUsuario({ ...usuario, idade: parseInt(e.target.value) })}
             required
           />
         </FormControl>
-        <FormControl id="senha" mb={4}>
-          <FormLabel>Senha</FormLabel>
-          <Input
-            type="password"
-            value={usuario.senha}
-            onChange={(e) => setUsuario({ ...usuario, senha: e.target.value })}
-            required
-          />
-        </FormControl>
-        <Button type="submit" colorScheme="teal">
-          Atualizar
-        </Button>
+        <Button type="submit" colorScheme="teal">Atualizar</Button>
       </form>
       <Link to="/usuarios">
-        <Button mt={4} colorScheme="red">
-          Cancelar
-        </Button>
+        <Button mt={4} colorScheme="red">Cancelar</Button>
       </Link>
     </Box>
   );
-}
+};
 
 export default UsuarioEditar;

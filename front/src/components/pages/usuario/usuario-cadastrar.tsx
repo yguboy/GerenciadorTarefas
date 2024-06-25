@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Button, FormControl, FormLabel, Input, Heading } from '@chakra-ui/react';
-import { Usuario } from '../../../Models/Usuario';
+import { Usuario } from '../../../Models/Usuario'; 
 
 const UsuarioCadastrar: React.FC = () => {
   const [nome, setNome] = useState('');
   const [idade, setIdade] = useState('');
 
-  async function cadastrarUsuario() {
+  async function cadastrarUsuario(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    
     const usuario: Usuario = {
       nome,
       idade: parseInt(idade),
@@ -24,6 +26,8 @@ const UsuarioCadastrar: React.FC = () => {
 
       if (response.ok) {
         console.log('Usuário cadastrado com sucesso');
+        setNome('');
+        setIdade('');
       } else {
         console.error('Erro ao cadastrar usuário:', response.statusText);
       }
@@ -35,12 +39,7 @@ const UsuarioCadastrar: React.FC = () => {
   return (
     <Box p={5}>
       <Heading as="h1" size="xl" mb={5}>Cadastrar Usuário</Heading>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          cadastrarUsuario();
-        }}
-      >
+      <form onSubmit={cadastrarUsuario}>
         <FormControl id="nome" mb={4}>
           <FormLabel>Nome</FormLabel>
           <Input
