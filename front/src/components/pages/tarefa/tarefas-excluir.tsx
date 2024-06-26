@@ -1,14 +1,16 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button, Box, Heading } from "@chakra-ui/react";
 
 function TarefaExcluir() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   async function excluirTarefa() {
     await fetch(`http://localhost:5284/api/tarefas/deletar/${id}`, {
       method: "DELETE",
     });
+    navigate("/tarefas");
   }
 
   return (

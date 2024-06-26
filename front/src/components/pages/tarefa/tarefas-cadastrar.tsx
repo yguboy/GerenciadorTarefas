@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Tarefa } from "../../../Models/Tarefa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, FormControl, FormLabel, Input, Heading } from "@chakra-ui/react";
 
 function TarefaCadastrar() {
@@ -8,6 +8,7 @@ function TarefaCadastrar() {
   const [descricao, setDescricao] = useState("");
   const [prioridade, setPrioridade] = useState("");
   const [status, setStatus] = useState("");
+  const navigate = useNavigate();
 
   async function cadastrarTarefa() {
     const tarefa: Tarefa = {
@@ -27,6 +28,7 @@ function TarefaCadastrar() {
       .then((resposta) => resposta.json())
       .then((tarefaCadastrada: Tarefa) => {
         console.log(tarefaCadastrada);
+        navigate("/tarefas");
       });
   }
 

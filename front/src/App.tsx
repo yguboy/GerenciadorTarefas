@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import TarefaListar from "./components/pages/tarefa/tarefas-listar";
 import TarefaCadastrar from "./components/pages/tarefa/tarefas-cadastrar";
 import TarefaEditar from "./components/pages/tarefa/tarefas-editar";
@@ -8,65 +8,180 @@ import UsuarioListar from "./components/pages/usuario/usuario-listar";
 import UsuarioCadastrar from "./components/pages/usuario/usuario-cadastrar";
 import UsuarioEditar from "./components/pages/usuario/usuario-editar";
 import UsuarioExcluir from "./components/pages/usuario/usuario-excluir";
-import PrioridadeListar from "./components/pages/prioridade/prioridade-listar"; // Importe a página de listagem de prioridades
-import { ChakraProvider } from "@chakra-ui/react";
+import PrioridadeListar from "./components/pages/prioridade/prioridade-listar";
+import { ChakraProvider, Box, Table, Tbody, Td, Th, Thead, Tr, Heading } from "@chakra-ui/react";
 import StatusListar from "./components/pages/status/status-listar";
 
 function App() {
   return (
     <div>
-    <ChakraProvider>
-        <BrowserRouter>
-        <nav>
-          <ul>
-            <li> <Link to="/"> Opções de Tarefas </Link> </li>
-              <li> <Link to="/front/src/components/pages/tarefa/tarefas-cadastrar.tsx"> Cadastrar Tarefas </Link> </li>
-              <li> <Link to="/front/src/components/pages/tarefa/tarefas-editar.tsx"> Editar Tarefas </Link> </li>
-              <li> <Link to="/front/src/components/pages/tarefa/tarefas-listar.tsx"> Listar Tarefas </Link> </li>
-              <li> <Link to="/front/src/components/pages/tarefa/tarefas-excluir.tsx"> Excluir Tarefas </Link> </li>
-            </ul>
-          <br />
-          <ul>
-            <li> <Link to="/"> Opções de Usuario </Link> </li>
-              <li> <Link to="/front/src/components/pages/usuario/usuario-cadastrar.tsx"> Cadastrar Usuarios </Link> </li>
-              <li> <Link to="/front/src/components/pages/usuario/usuario-editar.tsx"> Editar Usuarios </Link> </li>
-              <li> <Link to="/front/src/components/pages/usuario/usuario-listar.tsx"> Listar Usuarios </Link> </li>
-              <li> <Link to="/front/src/components/pages/usuario/usuario-excluir.tsx"> Excluir Usuarios </Link> </li>
-            </ul>
-          <br />
-          <ul>
-              <li> <Link to="/"> Opções de Prioridade </Link> </li>
-              <li> <Link to="/front/src/components/pages/prioridade/prioridade-cadastrar.tsx"> Cadastrar Prioridades </Link> </li>
-              <li> <Link to="/front/src/components/pages/prioridade/prioridade-editar.tsx"> Editar Prioridades </Link> </li>
-              <li> <Link to="/front/src/components/pages/prioridade/prioridade-listar.tsx"> Listar Prioridades </Link> </li>
-              <li> <Link to="/front/src/components/pages/prioridade/prioridade-excluir.tsx"> Excluir Prioridades </Link> </li>
-          </ul>
-          <br />
-          <ul>
-              <li> <Link to="/"> Opções de Status </Link> </li>
-              <li> <Link to="/front/src/components/pages/status/status-cadastrar.tsx"> Cadastrar Status </Link> </li>
-              <li> <Link to="/front/src/components/pages/status/status-editar.tsx"> Editar Status </Link> </li>
-              <li> <Link to="/front/src/components/pages/status/status-listar.tsx"> Listar Status </Link> </li>
-              <li> <Link to="/front/src/components/pages/status/status-excluir.tsxs"> Excluir Status </Link> </li>
-          </ul>
-        </nav>
+      <ChakraProvider>
+        <Router>
+          <Box p={5}>
+            <nav>
+              <Heading as="h2" size="lg" mb={5}>Opções de Tarefas</Heading>
+              <Table variant="striped" colorScheme="teal" mb={5}>
+                <Thead>
+                  <Tr>
+                    <Th>Nome</Th>
+                    <Th>Link</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>Cadastrar Tarefas</Td>
+                    <Td>
+                      <Link to="/tarefas-cadastrar">Cadastrar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Editar Tarefas</Td>
+                    <Td>
+                      <Link to="/tarefas-editar">Editar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Listar Tarefas</Td>
+                    <Td>
+                      <Link to="/tarefas-listar">Listar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Excluir Tarefas</Td>
+                    <Td>
+                      <Link to="/tarefas-excluir">Excluir</Link>
+                    </Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+
+              <Heading as="h2" size="lg" mb={5}>Opções de Usuário</Heading>
+              <Table variant="striped" colorScheme="teal" mb={5}>
+                <Thead>
+                  <Tr>
+                    <Th>Nome</Th>
+                    <Th>Link</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>Cadastrar Usuários</Td>
+                    <Td>
+                      <Link to="/usuario-cadastrar">Cadastrar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Editar Usuários</Td>
+                    <Td>
+                      <Link to="/usuario-editar">Editar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Listar Usuários</Td>
+                    <Td>
+                      <Link to="/usuario-listar">Listar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Excluir Usuários</Td>
+                    <Td>
+                      <Link to="/usuario-excluir">Excluir</Link>
+                    </Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+
+              <Heading as="h2" size="lg" mb={5}>Opções de Prioridade</Heading>
+              <Table variant="striped" colorScheme="teal" mb={5}>
+                <Thead>
+                  <Tr>
+                    <Th>Nome</Th>
+                    <Th>Link</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>Cadastrar Prioridades</Td>
+                    <Td>
+                      <Link to="/prioridade-cadastrar">Cadastrar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Editar Prioridades</Td>
+                    <Td>
+                      <Link to="/prioridade-editar">Editar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Listar Prioridades</Td>
+                    <Td>
+                      <Link to="/prioridade-listar">Listar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Excluir Prioridades</Td>
+                    <Td>
+                      <Link to="/prioridade-excluir">Excluir</Link>
+                    </Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+
+              <Heading as="h2" size="lg" mb={5}>Opções de Status</Heading>
+              <Table variant="striped" colorScheme="teal" mb={5}>
+                <Thead>
+                  <Tr>
+                    <Th>Nome</Th>
+                    <Th>Link</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>Cadastrar Status</Td>
+                    <Td>
+                      <Link to="/status-cadastrar">Cadastrar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Editar Status</Td>
+                    <Td>
+                      <Link to="/status-editar">Editar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Listar Status</Td>
+                    <Td>
+                      <Link to="/status-listar">Listar</Link>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Excluir Status</Td>
+                    <Td>
+                      <Link to="/status-excluir">Excluir</Link>
+                    </Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            </nav>
             <Routes>
-              <Route path="/front/src/components/pages/tarefa/tarefas-cadastrar.tsx" element={<TarefaCadastrar />} />
-              <Route path="/front/src/components/pages/tarefa/tarefas-editar.tsx" element={<TarefaEditar />} />
-              <Route path="/front/src/components/pages/tarefa/tarefas-listar.tsx" element={<TarefaListar />} />
-              <Route path="/front/src/components/pages/tarefa/tarefas-excluir.tsx" element={<TarefaExcluir />} />
-              <Route path="/front/src/components/pages/usuario/usuario-cadastrar.tsx" element={<UsuarioCadastrar />} />
-              <Route path="/front/src/components/pages/usuario/usuario-editar.tsx" element={<UsuarioEditar />} />
-              <Route path="/front/src/components/pages/usuario/usuario-listar.tsx" element={<UsuarioListar />} />
-              <Route path="/front/src/components/pages/usuario/usuario-excluir.tsx" element={<UsuarioExcluir />} />
-              <Route path="/front/src/components/pages/prioridade/prioridade-listar.tsx" element={<PrioridadeListar />} />
-              <Route path="/front/src/components/pages/status" element={<StatusListar />} />
+              <Route path="/tarefas-cadastrar" element={<TarefaCadastrar />} />
+              <Route path="/tarefas-editar" element={<TarefaEditar />} />
+              <Route path="/tarefas-listar" element={<TarefaListar />} />
+              <Route path="/tarefas-excluir" element={<TarefaExcluir />} />
+              <Route path="/usuario-cadastrar" element={<UsuarioCadastrar />} />
+              <Route path="/usuario-editar" element={<UsuarioEditar />} />
+              <Route path="/usuario-listar" element={<UsuarioListar />} />
+              <Route path="/usuario-excluir" element={<UsuarioExcluir />} />
+              <Route path="/prioridade-listar" element={<PrioridadeListar />} />
+              <Route path="/status-listar" element={<StatusListar />} />
             </Routes>
+          </Box>
           <footer>
-          <br />
-          <p> Desenvolvido por Felipe Pupo e Ygor Espada </p>
-        </footer>
-        </BrowserRouter>
+            <Box p={5} mt={5} textAlign="center">
+              <p>Desenvolvido por Felipe Pupo e Ygor Espada</p>
+            </Box>
+          </footer>
+        </Router>
       </ChakraProvider>
     </div>
   );

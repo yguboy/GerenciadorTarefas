@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Tarefa } from "../../../Models/Tarefa";
 import {
   Box,
@@ -12,7 +12,9 @@ import {
 
 function TarefaEditar() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [tarefa, setTarefa] = useState<Tarefa>({
+    id: "",
     nome: "",
     descricao: "",
     prioridade: "",
@@ -40,6 +42,7 @@ function TarefaEditar() {
       .then((resposta) => resposta.json())
       .then((tarefaEditada: Tarefa) => {
         console.log(tarefaEditada);
+        navigate("/tarefas");
       });
   }
 

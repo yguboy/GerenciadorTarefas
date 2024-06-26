@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Table, Tbody, Td, Th, Thead, Tr, Heading } from "@chakra-ui/react";
+import { Box, Button, Table, Tbody, Td, Th, Thead, Tr, Heading, Link as ChakraLink } from "@chakra-ui/react";
 import { Tarefa } from "../../../Models/Tarefa";
+import { Link } from "react-router-dom";
 
 function TarefaListar() {
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
@@ -26,6 +27,7 @@ function TarefaListar() {
             <Th>Descrição</Th>
             <Th>Prioridade</Th>
             <Th>Status</Th>
+            <Th>Ações</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -36,6 +38,14 @@ function TarefaListar() {
               <Td>{tarefa.descricao}</Td>
               <Td>{tarefa.prioridade}</Td>
               <Td>{tarefa.status}</Td>
+              <Td>
+                <ChakraLink as={Link} to={`/tarefas-editar/${tarefa.id}`}>
+                  <Button colorScheme="blue" size="sm" mr={2}>Editar</Button>
+                </ChakraLink>
+                <ChakraLink as={Link} to={`/tarefas-excluir/${tarefa.id}`}>
+                  <Button colorScheme="red" size="sm">Excluir</Button>
+                </ChakraLink>
+              </Td>
             </Tr>
           ))}
         </Tbody>
