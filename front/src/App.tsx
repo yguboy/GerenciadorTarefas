@@ -11,6 +11,12 @@ import UsuarioExcluir from "./components/pages/usuario/usuario-excluir";
 import PrioridadeListar from "./components/pages/prioridade/prioridade-listar";
 import { ChakraProvider, Box, Table, Tbody, Td, Th, Thead, Tr, Heading } from "@chakra-ui/react";
 import StatusListar from "./components/pages/status/status-listar";
+import PrioridadeCadastrar from "./components/pages/prioridade/prioridade-cadastrar";
+import PrioridadeEditar from "./components/pages/prioridade/prioridade-editar";
+import PrioridadeExcluir from "./components/pages/prioridade/prioridade-excluir";
+import StatusCadastrar from "./components/pages/status/status-cadastrar";
+import StatusEditar from "./components/pages/status/status-editar";
+import StatusExcluir from "./components/pages/status/status-excluir";
 
 function App() {
   return (
@@ -172,13 +178,19 @@ function App() {
               <Route path="/usuario-editar" element={<UsuarioEditar />} />
               <Route path="/usuario-listar" element={<UsuarioListar />} />
               <Route path="/usuario-excluir" element={<UsuarioExcluir />} />
+              <Route path="/prioridade-cadastrar" element={<PrioridadeCadastrar />} />
+              <Route path="/prioridade-editar" element={<PrioridadeEditar />} />
               <Route path="/prioridade-listar" element={<PrioridadeListar />} />
+              <Route path="/prioridade-excluir" element={<PrioridadeExcluir />} />
+              <Route path="/status-cadastrar" element={<StatusCadastrar />} />
+              <Route path="/status-editar" element={<StatusEditar />} />
               <Route path="/status-listar" element={<StatusListar />} />
+              <Route path="/status-excluir" element={<StatusExcluir />} />
             </Routes>
           </Box>
           <footer>
             <Box p={5} mt={5} textAlign="center">
-              <p>Desenvolvido por Felipe Pupo e Ygor Espada</p>
+              <p> Desenvolvido por Felipe Pupo e Ygor Espada </p>
             </Box>
           </footer>
         </Router>

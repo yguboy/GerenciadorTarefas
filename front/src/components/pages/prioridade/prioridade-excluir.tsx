@@ -1,13 +1,16 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button, Box, Heading } from "@chakra-ui/react";
 
 function PrioridadeExcluir() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
   async function excluirPrioridade() {
     await fetch(`http://localhost:5284/api/prioridades/deletar/${id}`, {
       method: "DELETE",
+    }).then(() => {
+      navigate("/prioridades");
     });
   }
 

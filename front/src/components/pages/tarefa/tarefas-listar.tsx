@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Button, Table, Tbody, Td, Th, Thead, Tr, Heading, Link as ChakraLink } from "@chakra-ui/react";
-import { Tarefa } from "../../../Models/Tarefa";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Box, Button, Table, Tbody, Td, Th, Thead, Tr, Heading } from "@chakra-ui/react";
+import { Tarefa } from "../../../Models/Tarefa";
 
 function TarefaListar() {
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
 
   useEffect(() => {
     async function fetchTarefas() {
-      const response = await fetch('http://localhost:5284/api/tarefas/listar');
+      const response = await fetch("http://localhost:5284/api/tarefa");
       const data = await response.json();
       setTarefas(data);
     }
-
-    fetchTarefas();
   }, []);
 
   return (
@@ -24,9 +22,6 @@ function TarefaListar() {
           <Tr>
             <Th>ID</Th>
             <Th>Nome</Th>
-            <Th>Descrição</Th>
-            <Th>Prioridade</Th>
-            <Th>Status</Th>
             <Th>Ações</Th>
           </Tr>
         </Thead>
@@ -35,21 +30,21 @@ function TarefaListar() {
             <Tr key={tarefa.id}>
               <Td>{tarefa.id}</Td>
               <Td>{tarefa.nome}</Td>
-              <Td>{tarefa.descricao}</Td>
-              <Td>{tarefa.prioridade}</Td>
-              <Td>{tarefa.status}</Td>
               <Td>
-                <ChakraLink as={Link} to={`/tarefas-editar/${tarefa.id}`}>
-                  <Button colorScheme="blue" size="sm" mr={2}>Editar</Button>
-                </ChakraLink>
-                <ChakraLink as={Link} to={`/tarefas-excluir/${tarefa.id}`}>
-                  <Button colorScheme="red" size="sm">Excluir</Button>
-                </ChakraLink>
+                <Link to={`/tarefa/editar/${tarefa.id}`}>
+                  <Button mr={2} colorScheme="blue">Editar</Button>
+                </Link>
+                <Link to={`/tarefa/excluir/${tarefa.id}`}>
+                  <Button colorScheme="red">Excluir</Button>
+                </Link>
               </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
+      <Link to="/tarefa/cadastrar">
+        <Button mt={4} colorScheme="teal">Cadastrar Nova Tarefa</Button>
+      </Link>
     </Box>
   );
 }

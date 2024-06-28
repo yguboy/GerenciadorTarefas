@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { Box, Button, FormControl, FormLabel, Input, Heading } from "@chakra-ui/react";
 import { Tarefa } from "../../../Models/Tarefa";
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Heading,
-} from "@chakra-ui/react";
 
-function TarefaEditar() {
-  const { id } = useParams();
+function TarefasEditar() {
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [tarefa, setTarefa] = useState<Tarefa>({
     id: "",
@@ -19,91 +12,74 @@ function TarefaEditar() {
     descricao: "",
     prioridade: "",
     status: "",
+    prazo: "",
+    categoria: "",
   });
 
   useEffect(() => {
     async function fetchTarefa() {
-      const response = await fetch(`http://localhost:5284/api/tarefas/buscar/${id}`);
+      const response = await fetch(`http://localhost:5284/api/tarefa/${id}`);
       const data = await response.json();
       setTarefa(data);
     }
 
-    fetchTarefa();
   }, [id]);
 
-  async function editarTarefa() {
-    await fetch(`http://localhost:5284/api/tarefas/alterar/${id}`, {
+  async function atualizarTarefa(e: React.FormEvent) {
+    e.preventDefault();
+    await fetch(`http://localhost:5284/api/tarefa/editar/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(tarefa),
-    })
-      .then((resposta) => resposta.json())
-      .then((tarefaEditada: Tarefa) => {
-        console.log(tarefaEditada);
-        navigate("/tarefas");
-      });
+    });
+    navigate("/tarefa");
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setTarefa((prevTarefa) => ({
+      ...prevTarefa,
+      [name]: value,
+    }));
   }
 
   return (
     <Box p={5}>
-      <Heading as="h1" size="xl" mb={5}>
-        Editar Tarefa
-      </Heading>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          editarTarefa();
-        }}
-      >
+      <Heading as="h1" size="xl" mb={5}>Editar Tarefa</Heading>
+      <form onSubmit={atualizarTarefa}>
         <FormControl id="nome" mb={4}>
           <FormLabel>Nome</FormLabel>
-          <Input
-            type="text"
-            value={tarefa.nome}
-            onChange={(e) => setTarefa({ ...tarefa, nome: e.target.value })}
-            required
-          />
+          <Input type="text" name="nome" value={tarefa.nome} onChange={handleChange} required />
         </FormControl>
         <FormControl id="descricao" mb={4}>
           <FormLabel>Descrição</FormLabel>
-          <Input
-            type="text"
-            value={tarefa.descricao}
-            onChange={(e) => setTarefa({ ...tarefa, descricao: e.target.value })}
-            required
-          />
+          <Input type="text" name="descricao" value={tarefa.descricao} onChange={handleChange} required />
         </FormControl>
         <FormControl id="prioridade" mb={4}>
           <FormLabel>Prioridade</FormLabel>
-          <Input
-            type="text"
-            value={tarefa.prioridade}
-            onChange={(e) => setTarefa({ ...tarefa, prioridade: e.target.value })}
-            required
-          />
+          <Input type="text" name="prioridade" value={tarefa.prioridade} onChange={handleChange} required />
         </FormControl>
         <FormControl id="status" mb={4}>
           <FormLabel>Status</FormLabel>
-          <Input
-            type="text"
-            value={tarefa.status}
-            onChange={(e) => setTarefa({ ...tarefa, status: e.target.value })}
-            required
-          />
+          <Input type="text" name="status" value={tarefa.status} onChange={handleChange} required />
         </FormControl>
-        <Button type="submit" colorScheme="teal">
-          Atualizar
-        </Button>
+        <FormControl id="prazo" mb={4}>
+          <FormLabel>Prazo</FormLabel>
+          <Input type="date" name="prazo" value={tarefa.prazo} onChange={handleChange} required />
+        </FormControl>
+        <FormControl id="categoria" mb={4}>
+          <FormLabel>Categoria</FormLabel>
+          <Input type="text" name="categoria" value={tarefa.categoria} onChange={handleChange} required />
+        </FormControl>
+        <Button type="submit" colorScheme="teal">Atualizar</Button>
       </form>
-      <Link to="/tarefas">
-        <Button mt={4} colorScheme="teal">
-          Voltar para Listagem
-        </Button>
+      <Link to="/tarefa">
+        <Button mt={4} colorScheme="teal">Voltar para Listagem</Button>
       </Link>
     </Box>
   );
 }
 
-export default TarefaEditar;
+export default TarefasEditar;

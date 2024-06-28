@@ -1,45 +1,36 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Box, Button, FormControl, FormLabel, Input, Heading } from '@chakra-ui/react';
-import { Usuario } from '../../../Models/Usuario'; 
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button, Box, Heading, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Usuario } from "../../../Models/Usuario";
 
-const UsuarioCadastrar: React.FC = () => {
-  const [nome, setNome] = useState('');
-  const [idade, setIdade] = useState('');
+function UsuarioCadastrar() {
+  const [nome, setNome] = useState("");
+  const [idade, setIdade] = useState("");
 
-  async function cadastrarUsuario(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    
+  async function cadastrarUsuario() {
     const usuario: Usuario = {
       nome,
       idade: parseInt(idade),
     };
 
-    try {
-      const response = await fetch('http://localhost:5284/api/usuarios/cadastrar', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(usuario),
-      });
-
-      if (response.ok) {
-        console.log('Usuário cadastrado com sucesso');
-        setNome('');
-        setIdade('');
-      } else {
-        console.error('Erro ao cadastrar usuário:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Erro ao cadastrar usuário:', error);
-    }
+    await fetch("http://localhost:5284/api/usuario/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(usuario),
+    });
   }
 
   return (
     <Box p={5}>
       <Heading as="h1" size="xl" mb={5}>Cadastrar Usuário</Heading>
-      <form onSubmit={cadastrarUsuario}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          cadastrarUsuario();
+        }}
+      >
         <FormControl id="nome" mb={4}>
           <FormLabel>Nome</FormLabel>
           <Input
@@ -58,13 +49,15 @@ const UsuarioCadastrar: React.FC = () => {
             required
           />
         </FormControl>
-        <Button type="submit" colorScheme="teal">Cadastrar</Button>
+        <Button type="submit" colorScheme="teal">
+          Cadastrar
+        </Button>
       </form>
       <Link to="/usuario">
         <Button mt={4} colorScheme="teal">Voltar para Listagem</Button>
       </Link>
     </Box>
   );
-};
+}
 
 export default UsuarioCadastrar;

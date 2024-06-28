@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Table, Tbody, Td, Th, Thead, Tr, Heading } from "@chakra-ui/react";
-// Especificando manualmente o caminho correto para o arquivo de model
 import { Status } from "../../../Models/Status";
 
 function StatusListar() {
-  const [statusList, setStatusList] = useState<Status[]>([]);
+  const [statuses, setStatuses] = useState<Status[]>([]);
 
   useEffect(() => {
-    async function fetchStatusList() {
-      const response = await fetch("http://localhost:5284/api/status");
+    async function fetchStatuses() {
+      const response = await fetch("http://localhost:5284/api/status/listar");
       const data = await response.json();
-      setStatusList(data);
+      setStatuses(data);
     }
 
-    fetchStatusList();
   }, []);
 
   return (
@@ -29,7 +27,7 @@ function StatusListar() {
           </Tr>
         </Thead>
         <Tbody>
-          {statusList.map((status) => (
+          {statuses.map((status) => (
             <Tr key={status.id}>
               <Td>{status.id}</Td>
               <Td>{status.nome}</Td>

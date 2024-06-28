@@ -1,42 +1,36 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button, Box, Heading, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { Tarefa } from "../../../Models/Tarefa";
-import { Link, useNavigate } from "react-router-dom";
-import { Box, Button, FormControl, FormLabel, Input, Heading } from "@chakra-ui/react";
 
 function TarefaCadastrar() {
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [prioridade, setPrioridade] = useState("");
-  const [status, setStatus] = useState("");
-  const navigate = useNavigate();
+  const [prazo, setPrazo] = useState("");
+  const [categoria, setCategoria] = useState("");
 
   async function cadastrarTarefa() {
     const tarefa: Tarefa = {
       nome,
       descricao,
-      prioridade,
-      status,
+      prazo,
+      categoria,
+      prioridade: "",
+      status: ""
     };
 
-    await fetch("http://localhost:5284/api/tarefas/cadastrar", {
+    await fetch("http://localhost:5284/api/tarefa/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(tarefa),
-    })
-      .then((resposta) => resposta.json())
-      .then((tarefaCadastrada: Tarefa) => {
-        console.log(tarefaCadastrada);
-        navigate("/tarefas");
-      });
+    });
   }
 
   return (
     <Box p={5}>
-      <Heading as="h1" size="xl" mb={5}>
-        Cadastrar Tarefa
-      </Heading>
+      <Heading as="h1" size="xl" mb={5}>Cadastrar Tarefa</Heading>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -61,21 +55,21 @@ function TarefaCadastrar() {
             required
           />
         </FormControl>
-        <FormControl id="prioridade" mb={4}>
-          <FormLabel>Prioridade</FormLabel>
+        <FormControl id="prazo" mb={4}>
+          <FormLabel>Prazo</FormLabel>
           <Input
-            type="text"
-            value={prioridade}
-            onChange={(e) => setPrioridade(e.target.value)}
+            type="date"
+            value={prazo}
+            onChange={(e) => setPrazo(e.target.value)}
             required
           />
         </FormControl>
-        <FormControl id="status" mb={4}>
-          <FormLabel>Status</FormLabel>
+        <FormControl id="categoria" mb={4}>
+          <FormLabel>Categoria</FormLabel>
           <Input
             type="text"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
+            value={categoria}
+            onChange={(e) => setCategoria(e.target.value)}
             required
           />
         </FormControl>
@@ -83,10 +77,8 @@ function TarefaCadastrar() {
           Cadastrar
         </Button>
       </form>
-      <Link to="/tarefas">
-        <Button mt={4} colorScheme="teal">
-          Voltar para Listagem
-        </Button>
+      <Link to="/tarefa">
+        <Button mt={4} colorScheme="teal">Voltar para Listagem</Button>
       </Link>
     </Box>
   );

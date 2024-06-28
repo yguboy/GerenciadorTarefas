@@ -4,6 +4,8 @@ export interface Tarefa {
     descricao: string;
     prioridade: string;
     status: string;
+    prazo: string;
+    categoria: string;
     criadoEm?: string;
   }
   

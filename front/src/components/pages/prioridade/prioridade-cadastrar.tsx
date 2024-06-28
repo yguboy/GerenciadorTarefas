@@ -5,15 +5,14 @@ import { Prioridade } from "../../../Models/Prioridade";
 
 function PrioridadeCadastrar() {
   const [nome, setNome] = useState("");
-  const [descricao, setDescricao] = useState("");
 
   async function cadastrarPrioridade() {
     const prioridade: Prioridade = {
       nome,
-      descricao
+      descricao: ""
     };
 
-    await fetch("http://localhost:5284/api/prioridades/cadastrar", {
+    await fetch("http://localhost:5284/api/prioridade/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,20 +39,11 @@ function PrioridadeCadastrar() {
             required
           />
         </FormControl>
-        <FormControl id="descricao" mb={4}>
-          <FormLabel>Descrição</FormLabel>
-          <Input
-            type="text"
-            value={descricao}
-            onChange={(e) => setDescricao(e.target.value)}
-            required
-          />
-        </FormControl>
         <Button type="submit" colorScheme="teal">
           Cadastrar
         </Button>
       </form>
-      <Link to="/prioridades">
+      <Link to="/prioridade">
         <Button mt={4} colorScheme="teal">Voltar para Listagem</Button>
       </Link>
     </Box>

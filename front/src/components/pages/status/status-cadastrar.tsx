@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Box, Heading, FormControl, FormLabel, Input } from "@chakra-ui/react";
-// Especificando manualmente o caminho correto para o arquivo de model
 import { Status } from "../../../Models/Status";
 
 function StatusCadastrar() {
@@ -9,7 +8,7 @@ function StatusCadastrar() {
 
   async function cadastrarStatus() {
     const status: Status = {
-      nome
+      nome,
     };
 
     await fetch("http://localhost:5284/api/status/cadastrar", {

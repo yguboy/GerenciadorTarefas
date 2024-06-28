@@ -17,7 +17,6 @@ const UsuarioEditar: React.FC = () => {
       setUsuario(data);
     }
 
-    fetchUsuario();
   }, [id]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {

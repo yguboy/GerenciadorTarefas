@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Button, Box, Heading, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { Prioridade } from "../../../Models/Prioridade";
 
@@ -8,17 +8,17 @@ function PrioridadeEditar() {
   const [prioridade, setPrioridade] = useState<Prioridade | null>(null);
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchPrioridade() {
-      const response = await fetch(`http://localhost:5284/api/prioridades/${id}`);
+      const response = await fetch(`http://localhost:5284/api/prioridades/editar/${id}`);
       const data = await response.json();
       setPrioridade(data);
       setNome(data.nome);
       setDescricao(data.descricao);
     }
 
-    fetchPrioridade();
   }, [id]);
 
   async function editarPrioridade() {
@@ -36,7 +36,11 @@ function PrioridadeEditar() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedPrioridade),
-    });
+    })
+      .then((resposta) => resposta.json())
+      .then(() => {
+        navigate("/prioridades");
+      });
   }
 
   return (
